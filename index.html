@@ -107,9 +107,10 @@
   .left {
     margin-left: 233px;
   }
+
 </style>
 <div id="blocks">
-  <img src="CHASE-Copy of Page-6.png"></img>
+  <img srcset="CHASE-Copy-of-Page-6.png 2x"></img>
 
   <svg class="left" width="20" style="width: 20px !important; height: 53px !important; display: block;" height="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
     <path fill="#ffffff" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
@@ -119,7 +120,7 @@
     <path fill="#ffffff" d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"></path>
   </svg>
 
-  <div class="pointCont" onclick="asd(this, event)">
+  <div class="pointCont" onclick="pointEvent(this, event)">
     <div class="pointOuter">
       <div class="pointInner"></div>
     </div>
@@ -135,10 +136,6 @@
 </div>
 
 <script>
-  c = 20
-  img = document.querySelector("img")
-  img.width = img.width * 0.5
-
   document.onclick = function () {
     for (i of Object.keys(a)) {
       if (a[i].status === true) {
@@ -148,7 +145,7 @@
     }
   }
 
-  function asd(item, event) {
+  function pointEvent(item, event) {
     var name = item.id.slice(0, -6)
     var node = document.getElementById(name + "-content")
     if (a[name].status === false) {
@@ -210,6 +207,7 @@
     node.style.left = i.x + '%';
     node.style.top = i.y + '%';
     document.getElementById("blocks").appendChild(node);
+
     node = document.getElementsByClassName("contentCont")[0].cloneNode(true);
     node.id = j + "-content";
     node.style.left = "calc(" + i.x + "% + " + (i.dir[0] ? 35 : -255) + 'px';
@@ -217,6 +215,7 @@
     node.getElementsByClassName("content")[0].innerHTML = i.content;
     node.getElementsByClassName("arrow")[0].appendChild(document.getElementsByClassName(i.dir[0] ? "right" : "left")[0].cloneNode(true))
     document.getElementById("blocks").appendChild(node);
+
     node.visibility = "hidden"
     node.style.display = "block"
     var height = node.offsetHeight
@@ -226,11 +225,12 @@
     if (i.dir[1]) {
       node.getElementsByClassName("arrow")[0].style.marginTop = height - 73
     }
+
     i["status"] = false
 	}
 
-  document.getElementsByClassName("pointCont")[0].style.display = "none";
-  document.getElementsByClassName("contentCont")[0].style.display = "none";
-  document.getElementsByClassName("left")[0].style.display = "none";
-  document.getElementsByClassName("right")[0].style.display = "none";
+  document.getElementsByClassName("pointCont")[0].remove();
+  document.getElementsByClassName("contentCont")[0].remove();
+  document.getElementsByClassName("left")[0].remove();
+  document.getElementsByClassName("right")[0].remove();
 </script>

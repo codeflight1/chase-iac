@@ -1,8 +1,7 @@
 <style>
   #blocks {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    display: inline-block;
   }
 
   .pointCont, .pointOuter {
@@ -102,24 +101,23 @@
 
   body {
     margin: 20px;
+    display: inline-block;
   }
 
   .left {
     margin-left: 233px;
   }
 </style>
-
-<img src="CHASE-Copy of Page-6.png"></img>
-
-<svg class="left" width="20" style="width: 20px !important; height: 53px !important; display: block;" height="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
-  <path fill="#ffffff" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
-</svg>
-
-<svg class="right" width="20" style="width: 20px !important; height: 53px !important; display: block;" height="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
-  <path fill="#ffffff" d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"></path>
-</svg>
-
 <div id="blocks">
+  <img src="CHASE-Copy of Page-6.png"></img>
+
+  <svg class="left" width="20" style="width: 20px !important; height: 53px !important; display: block;" height="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
+    <path fill="#ffffff" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
+  </svg>
+
+  <svg class="right" width="20" style="width: 20px !important; height: 53px !important; display: block;" height="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
+    <path fill="#ffffff" d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"></path>
+  </svg>
 
   <div class="pointCont" onclick="asd(this, event)">
     <div class="pointOuter">
@@ -135,7 +133,6 @@
     </div>
   </div>
 </div>
-
 
 <script>
   c = 20
@@ -163,43 +160,43 @@
 
   var a = {
     mram: {
-      x: 170,
-      y: 90,
+      x: 27.7,
+      y: 18.6,
       title: "Magnetoresistive RAM (MRAM)",
       content: "MRAM is used for non-volatile program storage.<br>MRAM stores data in magnetic tunnel junctions, making it more reliable and less susceptible to SEUs.",
       dir: [true, false]
     },
     ddr: {
-      x: 260,
-      y: 20,
+      x: 42.3,
+      y: 4.1,
       title: "LPPDR4",
       content: "LPDDR4 is the low-power version of the common DDR4 standard, and is used for volatile storage. The SoC's memory controller supports ECC, which reduces the risk of SEUs.",
       dir: [true, false]
     },
     soc: {
-      x: 400,
-      y: 120,
+      x: 65.1,
+      y: 24.8,
       title: "AM6548 SoC",
       content: "The SoC is the most important part, and we selected the Texas Instruments AM6548, a processor designed for industrial control applications. It was chosen for its inclusion of real-time cores, application cores, programmable real-time units, and extensive use of ECC on internal memories. The programmable real-time units each contain two processing cores, two real-time cores, two gigabit Ethernet interfaces, and a variety of IO options. These are of special interest for CHASE, because one can be dedicated to verifying and synchronizing systems between the three processors, offloading that work from the main processors.",
       dir: [false, false]
     },
     psu: {
-      x: 50,
-      y: 150,
+      x: 8.1,
+      y: 31.0,
       title: "Dual-redundant PSU",
       content: "The dual-redundant power supply unit (PSU) regulates a 28V supply down to the levels required by the SoC and its subsystems.",
       dir: [true, false]
     },
     io: {
-      x: 450,
-      y: 450,
+      x: 73.3,
+      y: 93.0,
       title: "IO Interface board",
         content: "The processing PCB is designed to connect to a mission-specific interface board. The processing PCB provides power, and passes through the following interfaces from each processor:<ul><li>RGMII Gigabit Ethernet (2)</li><li>CAN (2)</li><li>high-speed SerDes (2)</li><li>GPIO</li>",
       dir: [false, true]
     },
     flash: {
-      x: 500,
-      y: 200,
+      x: 81.4,
+      y: 41.3,
       title: "Flash mass storage",
       content: "Commercial flash storage is used for mass storage of mission or scientific data. Flash storage is more sensitive to radiation, but alternatives such as MRAM are simply not available in the required densities. OCHRES uses the ZFS filesystem which can detect and correct errors, similar to the use of ECC on volatile memories.",
       dir: [false, false]
@@ -210,14 +207,12 @@
     var node = document.getElementsByClassName("pointCont")[0].cloneNode(true);
     node.id = j + "-point";
     i = a[j]
-    node.style.left = i.x + c +'px';
-    node.style.top = i.y + c +'px';
+    node.style.left = i.x + '%';
+    node.style.top = i.y + '%';
     document.getElementById("blocks").appendChild(node);
-
     node = document.getElementsByClassName("contentCont")[0].cloneNode(true);
     node.id = j + "-content";
-
-    node.style.left = i.x + (i.dir[0] ? 35 : -255) + c + 'px';
+    node.style.left = "calc(" + i.x + "% + " + (i.dir[0] ? 35 : -255) + 'px';
     node.getElementsByClassName("title")[0].innerHTML = i.title;
     node.getElementsByClassName("content")[0].innerHTML = i.content;
     node.getElementsByClassName("arrow")[0].appendChild(document.getElementsByClassName(i.dir[0] ? "right" : "left")[0].cloneNode(true))
@@ -227,7 +222,7 @@
     var height = node.offsetHeight
     node.style.display = ""
     node.visibility = ""
-    node.style.top = i.y - (i.dir[1] ? (height - 36.5): 36.5) + c + 'px';
+    node.style.top = "calc(" + i.y + "% - " + (i.dir[1] ? (height - 36.5) : 36.5) + "px)";
     if (i.dir[1]) {
       node.getElementsByClassName("arrow")[0].style.marginTop = height - 73
     }

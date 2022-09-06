@@ -1,5 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 <style>
   #blocks {
     position: absolute;
@@ -141,10 +139,8 @@
 
 <script>
   c = 20
-  $( "img" ).each( function() {
-    var $img = $( this );
-    $img.width( $img.width() * .5 );
-  });
+  img = document.querySelector("img")
+  img.width = img.width * 0.5
 
   document.onclick = function () {
     for (i of Object.keys(a)) {

@@ -5,8 +5,13 @@
   }
 
   body {
-    margin: 0px;
+    margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   img {
@@ -16,6 +21,16 @@
   .container {
     max-width: 1228px;
     margin: 0 auto;
+    text-align: center;
+  }
+
+  #wrapper {
+    padding: 20px;
+    max-height: 100vh;
+  }
+
+  #chaseSVG {
+    max-height: calc(100vh - 40px);
   }
 
   #modalTitle {
@@ -56,8 +71,9 @@
     box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
     position: absolute;
     left: 50%;
-    top: 50px;
+    top: 10%;
     transform: translate(-50%, -50%);
+    text-align: left;
   }
 
   .close {
@@ -75,18 +91,29 @@
     cursor: pointer;
   }
 
-  .hover_group {
+  svg rect {
+    fill: transparent;
+  }
+
+  svg circle {
+    fill: #ffffff;
+    stroke: black;
+    stroke-width: 3;
+    filter: drop-shadow(0px 5px 2px rgb(0 0 0 / 0.4));
+  }
+
+  /* .hover_group {
     transition: opacity 0.25s ease-in-out;
   }
 
   .hover_group rect {
     opacity: 0.8;
     fill: #ffffff;
-  }
+  } */
 
-  .hover_group:hover {
+  /* .hover_group:hover {
     opacity: 0.5;
-  }
+  } */
 
   @keyframes animatetop {
     0% {
@@ -94,7 +121,7 @@
       opacity: 0;
     }
     100% {
-      top: 50px;
+      top: 10%;
       opacity: 1;
     }
   }
@@ -102,6 +129,7 @@
 <div id="blocks" class="container">
   <div id="wrapper">
     <svg
+      id="chaseSVG"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -116,34 +144,47 @@
       />
 
       <!-- create the regions -->
-      <g class="hover_group" opacity="0">
+      <g class="hover_group">
         <a href="#" onclick="showInfo('mram')">
           <rect x="320" y="140" width="282" height="142"></rect>
+          <circle cx="590" cy="150" r="15"></circle>
         </a>
       </g>
-      <g class="hover_group" opacity="0">
+
+      <g class="hover_group">
         <a href="#" onclick="showInfo('ddr')">
-          <rect x="320" y="20" width="282" height="102"></rect>
+          <rect x="320" y="22" width="282" height="100"></rect>
+          <circle cx="590" cy="30" r="15"></circle>
         </a>
       </g>
-      <g class="hover_group" opacity="0">
+      <g class="hover_group">
         <a href="#" onclick="showInfo('psu')">
           <rect x="60" y="260" width="162" height="82"></rect>
+          <circle cx="210" cy="270" r="15"></circle>
         </a>
       </g>
-      <g class="hover_group" opacity="0">
+      <g class="hover_group">
         <a href="#" onclick="showInfo('psu')">
           <rect x="60" y="360" width="162" height="82"></rect>
+          <circle cx="210" cy="370" r="15"></circle>
         </a>
       </g>
-      <g class="hover_group" opacity="0">
+      <g class="hover_group">
         <a href="#" onclick="showInfo('flash')">
           <rect x="980" y="280" width="242" height="162"></rect>
+          <circle cx="1210" cy="290" r="15"></circle>
         </a>
       </g>
-      <g class="hover_group" opacity="0">
+      <g class="hover_group">
         <a href="#" onclick="showInfo('io')">
           <rect x="20" y="840" width="1202" height="122"></rect>
+          <circle cx="1210" cy="850" r="15"></circle>
+        </a>
+      </g>
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('soc')">
+          <rect x="622" y="22" width="260" height="260"></rect>
+          <circle cx="870" cy="32" r="15"></circle>
         </a>
       </g>
     </svg>

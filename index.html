@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <style>
-  #blocks {
-    position: relative;
+  body {
+    margin: 0px;
   }
 
   .pointCont, .pointOuter {
@@ -8,6 +9,7 @@
   }
 
   .pointCont {
+    display: block;
     box-sizing: border-box;
     width: 30px;
     height: 30px;
@@ -103,11 +105,26 @@
   }
 
   img {
-    width:100%;
+    height: 100%;
+    display: block;
+    max-width: 100vw;
+    max-height: 100vh;
   }
+
+  #blocks {
+    display: inline;
+    position: relative;
+  }
+
+  #holder {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
 </style>
 <div id="blocks">
-  <img src="CHASE-Copy-of-Page-6.png"></img>
+  <div id="wrapper" style="display: initial"><img src="CHASE-Copy-of-Page-6.png"></img></div>
 
   <svg class="left" width="20" style="width: 20px !important; height: 53px !important; display: block;" height="53" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
     <path fill="#ffffff" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path>
@@ -130,9 +147,21 @@
       <div class="content"></div>
     </div>
   </div>
+
+  <div id="holder">
+  </div>
 </div>
 
 <script>
+  function update(event) {
+    document.getElementById("holder").style.width = document.getElementById("wrapper").offsetWidth + "px"
+    document.getElementById("holder").style.height = document.getElementById("wrapper").offsetHeight + "px"
+    document.querySelector("body").style.marginLeft = ((Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) - document.getElementById("wrapper").offsetWidth) / 2) + "px"
+  }
+
+  window.addEventListener('resize', update, true);
+  window.addEventListener('load', update, true);
+
   document.onclick = function () {
     for (i of Object.keys(a)) {
       if (a[i].status === true) {
@@ -154,15 +183,15 @@
 
   var a = {
     mram: {
-      x: 27.7,
-      y: 18.6,
+      x: 29,
+      y: 25,
       title: "Magnetoresistive RAM (MRAM)",
       content: "MRAM is used for non-volatile program storage.<br>MRAM stores data in magnetic tunnel junctions, making it more reliable and less susceptible to SEUs.",
       dir: [true, false]
     },
     ddr: {
-      x: 42.3,
-      y: 4.1,
+      x: 45,
+      y: 10,
       title: "LPPDR4",
       content: "LPDDR4 is the low-power version of the common DDR4 standard, and is used for volatile storage. The SoC's memory controller supports ECC, which reduces the risk of SEUs.",
       dir: [true, false]
@@ -176,14 +205,14 @@
     },
     psu: {
       x: 8.1,
-      y: 31.0,
+      y: 40,
       title: "Dual-redundant PSU",
       content: "The dual-redundant power supply unit (PSU) regulates a 28V supply down to the levels required by the SoC and its subsystems.",
       dir: [true, false]
     },
     io: {
       x: 73.3,
-      y: 93.0,
+      y: 95.0,
       title: "IO Interface board",
         content: "The processing PCB is designed to connect to a mission-specific interface board. The processing PCB provides power, and passes through the following interfaces from each processor:<ul><li>RGMII Gigabit Ethernet (2)</li><li>CAN (2)</li><li>high-speed SerDes (2)</li><li>GPIO</li>",
       dir: [false, true]
@@ -203,15 +232,15 @@
     i = a[j]
     node.style.left = i.x + '%';
     node.style.top = i.y + '%';
-    document.getElementById("blocks").appendChild(node);
+    document.getElementById("holder").appendChild(node);
 
     node = document.getElementsByClassName("contentCont")[0].cloneNode(true);
     node.id = j + "-content";
-    node.style.left = "calc(" + i.x + "% + " + (i.dir[0] ? 35 : -255) + 'px';
+    node.style.left = "calc(" + i.x + "% + " + (i.dir[0] ? 35 : -255) + "px";
     node.getElementsByClassName("title")[0].innerHTML = i.title;
     node.getElementsByClassName("content")[0].innerHTML = i.content;
     node.getElementsByClassName("arrow")[0].appendChild(document.getElementsByClassName(i.dir[0] ? "right" : "left")[0].cloneNode(true))
-    document.getElementById("blocks").appendChild(node);
+    document.getElementById("holder").appendChild(node);
 
     node.visibility = "hidden"
     node.style.display = "block"
@@ -220,7 +249,7 @@
     node.visibility = ""
     node.style.top = "calc(" + i.y + "% - " + (i.dir[1] ? (height - 36.5) : 36.5) + "px)";
     if (i.dir[1]) {
-      node.getElementsByClassName("arrow")[0].style.marginTop = height - 73
+      node.getElementsByClassName("arrow")[0].style.marginTop = (height - 73) + "px"
     }
 
     i["status"] = false

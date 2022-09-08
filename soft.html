@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="style.css"></link>
+<div id="blocks" class="container">
+  <div id="wrapper">
+    <svg
+      id="chaseSVG"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 1228 968"
+      preserveAspectRatio="xMinYMin meet"
+    >
+      <!-- background image -->
+      <image
+        width="1228"
+        height="968"
+        xlink:href="https://codeflight1.github.io/chase-iac/CHASE-Page-7-2.png"
+      />
+
+      <!-- create the regions -->
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('mram')">
+          <rect x="320" y="140" width="282" height="142"></rect>
+          <circle cx="590" cy="150" r="15"></circle>
+        </a>
+      </g>
+
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('ddr')">
+          <rect x="320" y="22" width="282" height="100"></rect>
+          <circle cx="590" cy="30" r="15"></circle>
+        </a>
+      </g>
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('psu')">
+          <rect x="60" y="260" width="162" height="82"></rect>
+          <circle cx="210" cy="270" r="15"></circle>
+        </a>
+      </g>
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('psu')">
+          <rect x="60" y="360" width="162" height="82"></rect>
+          <circle cx="210" cy="370" r="15"></circle>
+        </a>
+      </g>
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('flash')">
+          <rect x="980" y="280" width="242" height="162"></rect>
+          <circle cx="1210" cy="290" r="15"></circle>
+        </a>
+      </g>
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('io')">
+          <rect x="20" y="840" width="1202" height="122"></rect>
+          <circle cx="1210" cy="850" r="15"></circle>
+        </a>
+      </g>
+      <g class="hover_group">
+        <a href="#" onclick="showInfo('soc')">
+          <rect x="622" y="22" width="260" height="260"></rect>
+          <circle cx="870" cy="32" r="15"></circle>
+        </a>
+      </g>
+    </svg>
+  </div>
+
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-body">
+        <h2 id="modalTitle"></h2>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const content = {
+    mram: {
+      title: "Magnetoresistive RAM (MRAM)",
+      content:
+        "<p>MRAM is used for non-volatile program storage.</p>" +
+        "<p>MRAM stores data in magnetic tunnel junctions, making it more reliable and less susceptible to SEUs.</p>",
+    },
+    ddr: {
+      title: "LPPDR4",
+      content:
+        "<p>LPDDR4 is the low-power version of the common DDR4 standard, and is used for volatile storage. The SoC's memory controller supports ECC, which reduces the risk of SEUs.</p>",
+    },
+    soc: {
+      title: "AM6548 SoC",
+      content:
+        "<p>The SoC is the most important part, and we selected the Texas Instruments AM6548, a processor designed for industrial control applications. It was chosen for its inclusion of real-time cores, application cores, programmable real-time units, and extensive use of ECC on internal memories. The programmable real-time units each contain two processing cores, two real-time cores, two gigabit Ethernet interfaces, and a variety of IO options. These are of special interest for CHASE, because one can be dedicated to verifying and synchronizing systems between the three processors, offloading that work from the main processors.</p>",
+    },
+    psu: {
+      title: "Dual-redundant PSU",
+      content:
+        "<p>The dual-redundant power supply unit (PSU) regulates a 28V supply down to the levels required by the SoC and its subsystems.</p>",
+    },
+    io: {
+      title: "IO Interface board",
+      content:
+        "<p>The processing PCB is designed to connect to a mission-specific interface board. The processing PCB provides power, and passes through the following interfaces from each processor:</p>" +
+        "<ul><li>RGMII Gigabit Ethernet (2)</li><li>CAN (2)</li><li>high-speed SerDes (2)</li><li>GPIO</li>",
+    },
+    flash: {
+      title: "Flash mass storage",
+      content:
+        "<p>Commercial flash storage is used for mass storage of mission or scientific data. Flash storage is more sensitive to radiation, but alternatives such as MRAM are simply not available in the required densities. OCHRES uses the ZFS filesystem which can detect and correct errors, similar to the use of ECC on volatile memories.</p>",
+    },
+  };
+
+</script>
+<script src="script.js"></script>

@@ -8,7 +8,7 @@ body {
 }
 
 p {
-  font-size: 16px;
+  /*font-size: 16px;*/
   line-height: 1.5;
 }
 
@@ -121,5 +121,15 @@ svg circle {
   100% {
     top: 10%;
     opacity: 1;
+  }
+}
+
+@media (max-width: 460px) {
+  #modalTitle {
+    font-size: 12px;
+  }
+
+  #modalContent {
+    font-size: 8px;
   }
 }
